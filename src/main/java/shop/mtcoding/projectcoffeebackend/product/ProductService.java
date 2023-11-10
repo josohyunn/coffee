@@ -31,15 +31,15 @@ public class ProductService {
     private final ProductJPARepository productJPARepository;
     private final OptionJPARepository optionJPARepository;
 
-//    public Page<MyProductDTO>
-     public void 음료조회(Integer page, Integer id) {
-//        Pageable pageable = PageRequest.of(page, 10, Sort.Direction.DESC, "id");
-//        Page<MyProductDTO> beverageList = productJPARepository.findAllWithOptionAndSize(pageable);
+    // public Page<MyProductDTO>
+    public ProductResponse.MyProductDTO 음료조회(Integer page, Integer id) {
+        // Pageable pageable = PageRequest.of(page, 10, Sort.Direction.DESC, "id");
+        // Page<MyProductDTO> beverageList =
+        // productJPARepository.findAllWithOptionAndSize(pageable);
 
         List<Product> productList = productJPARepository.findAllByCategoryId(id);
 
-
-//        return beverageList;
+        return new ProductResponse.MyProductDTO(productList);
     }
 
     @Transactional

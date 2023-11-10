@@ -19,17 +19,19 @@ public class ProductController {
 
     // 음료 등록 페이지
     @GetMapping("/product/{id}/registerbeveragesform")
-    public String viewBeverage(@RequestParam(defaultValue = "0") Integer page, HttpServletRequest request, @PathVariable Integer id) {
+    public String viewBeverage(@RequestParam(defaultValue = "0") Integer page, HttpServletRequest request,
+            @PathVariable Integer id) {
         System.out.println("id값 :" + id);
-//        Page<MyProductDTO> beveragePG = productService.음료조회(page, id);
+        // Page<MyProductDTO> beveragePG = productService.음료조회(page, id);
 
-//        request.setAttribute("page", page);
-//        request.setAttribute("beveragePG", beveragePG);
-//        request.setAttribute("prevPage", beveragePG.getNumber() - 1);
-//        request.setAttribute("nextPage", beveragePG.getNumber() + 1);
+        ProductResponse.MyProductDTO response = productService.음료조회(page, id);
+        // request.setAttribute("page", page);
+        request.setAttribute("response", response);
+        // request.setAttribute("prevPage", beveragePG.getNumber() - 1);
+        // request.setAttribute("nextPage", beveragePG.getNumber() + 1);
 
-
-
+        System.out.println(response.getProducts().get(0));
+        System.out.println(response.getProducts().get(0).getId());
 
         return "/product/registerBeveragesForm";
     }

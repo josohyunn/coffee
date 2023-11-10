@@ -159,17 +159,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{#beveragePG}}
+                    {{#response.products}}
                     <tr>
-                        <td style="width: 40px;">{{id}}</td>
-                        <td style="width: 130px;">{{categoryName}}</td>
+                        <td style="width: 40px;">{{#id}}{{.}}{{/id}}</td>
+                        <td style="width: 130px;">{{#categoryName}}{{.}}{{/categoryName}}</td>
                         <td style="width: 120px;"><img src="/images/{{picUrl}}"
                                 style="height: 120px;"><!--{{picUrl}}--></img>
                         </td>
-                        <td style="width: 160px;">{{productName}}</td>
-                        <td style="width: 160px;">{{engName}}</td>
-                        <td style="width: 260px;">{{description}}</td>
-                        <td style="width: 260px;">{{tip}}</td>
+                        <td style="width: 160px;">{{products.productName}}</td>
+                        <td style="width: 160px;">{{products.engName}}</td>
+                        <td style="width: 260px;">{{products.description}}</td>
+                        <td style="width: 260px;">{{products.tip}}</td>
                         {{#isIced}}
                         <td style="width: 60px;">Iced</td>
                         {{/isIced}}
@@ -208,7 +208,7 @@
                         <!-- 아이콘으로 표시할것-->
 
                     </tr>
-                    {{/beveragePG}}
+                    {{/response.products}}
 
                 </tbody>
             </table>
