@@ -220,6 +220,7 @@ public class ProductService {
 
     public ProductRestResponse.FindAllProductDTO findAllAndCategoryId(int id) {
         List<Product> productListPS = productJPARepository.findAllByCategoryIdWithOptionId(id);
+//        System.out.println("옵션" + productListPS.get(0).getOptions().get(0).getSize());
         ProductRestResponse.FindAllProductDTO productList = new ProductRestResponse.FindAllProductDTO(productListPS);
         return productList;
     }

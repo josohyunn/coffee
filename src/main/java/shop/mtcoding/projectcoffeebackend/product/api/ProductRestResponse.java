@@ -18,38 +18,43 @@ public class ProductRestResponse {
         private List<ProductListDTO> productList;
 
         public FindAllProductDTO(List<Product> products) {
-            this.productList = products.stream().map(product -> new ProductListDTO(product)).collect(Collectors.toList());
+            this.productList = products.stream()
+                    .distinct()
+                    .map(product -> new ProductListDTO(product))
+
+                    .collect(Collectors.toList());
 
         }
 
         @Getter
         @Setter
         class ProductListDTO {
-            private int id;
+            private int productId;
             private String name;
             private String engName;
             private String picUrl;
-            List<OptionDTO> optionList;
+            private int optionId;
+            private int price;
 
             public ProductListDTO(Product product) {
-                this.id = product.getId();
+                this.productId = product.getId();
                 this.name = product.getName();
                 this.engName = product.getEngName();
                 this.picUrl = product.getPicUrl();
-                this.optionList = product.getOptions().stream().map(option -> new OptionDTO(option))
-                        .collect(Collectors.toList());
+                this.optionId = product.getOptions().get(0).getId();
+                this.price = product.getOptions().get(0).getPrice();
             }
-            @Getter
-            @Setter
-            class OptionDTO {
-                private int id;
-                private int price;
-
-                public OptionDTO(Option option) {
-                    this.id = option.getId();
-                    this.price = option.getPrice();
-                }
-            }
+//            @Getter
+//            @Setter
+//            class OptionDTO {
+//                private int id;
+//                private int price;
+//
+//                public OptionDTO(Option option) {
+//                    this.id = option.getId();
+//                    this.price = option.getPrice();
+//                }
+//            }
         }
 
 
