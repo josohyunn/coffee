@@ -15,11 +15,18 @@ public class CategoryResponse {
 
     @Getter
     @Setter
-    public static class CategoryListDTO {
-        List<Category> categoryList;
-
-        public CategoryListDTO(List<Category> categoryList) {
-            this.categoryList = categoryList;
+    public static class FindAllListDTO { // See All의 카테고리DTO List
+        private int id;
+        private String name;
+        private String engName;
+        private int code;
+        private String picUrl;
+        public FindAllListDTO(Category category) {
+            this.id = category.getId();
+            this.name = category.getName();
+            this.engName = category.getEngName();
+            this.code = category.getCode();
+            this.picUrl = category.getPicUrl();
         }
     }
 }

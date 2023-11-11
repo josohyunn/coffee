@@ -19,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 import shop.mtcoding.projectcoffeebackend._core.errors.exception.Exception400;
 import shop.mtcoding.projectcoffeebackend._core.vo.MyPath;
 import shop.mtcoding.projectcoffeebackend.category.Category;
+import shop.mtcoding.projectcoffeebackend.product.api.ProductRestResponse;
 import shop.mtcoding.projectcoffeebackend.product.option.Option;
 import shop.mtcoding.projectcoffeebackend.product.option.OptionJPARepository;
 import shop.mtcoding.projectcoffeebackend.product.option.size.Size;
@@ -32,14 +33,14 @@ public class ProductService {
     private final OptionJPARepository optionJPARepository;
 
     // public Page<MyProductDTO>
-    public ProductResponse.MyProductDTO 음료조회(Integer page, Integer id) {
+    public List<Product> 음료조회(Integer page, Integer id) {
         // Pageable pageable = PageRequest.of(page, 10, Sort.Direction.DESC, "id");
         // Page<MyProductDTO> beverageList =
         // productJPARepository.findAllWithOptionAndSize(pageable);
 
-        List<Product> productList = productJPARepository.findAllByCategoryId(id);
+        List<Product> productList = productJPARepository.findAllByCategoryIdAndOptions(id);
 
-        return new ProductResponse.MyProductDTO(productList);
+        return productList;
     }
 
     @Transactional
@@ -215,6 +216,12 @@ public class ProductService {
     public void 푸드삭제(Integer id) {
 
         productJPARepository.deleteById(id);
+    }
+
+    public ProductRestResponse.FindAllProductDTO findAllAndCategoryId(int id) {
+        List<Product> productListPS = productJPARepository.findAllByCategoryIdWithOptionId(id);
+        ProductRestResponse.FindAllProductDTO productList = new ProductRestResponse.FindAllProductDTO(productListPS);
+        return productList;
     }
 
 }

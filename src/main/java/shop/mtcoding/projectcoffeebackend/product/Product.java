@@ -1,5 +1,6 @@
 package shop.mtcoding.projectcoffeebackend.product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -43,7 +44,7 @@ public class Product {
     private Category category;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    List<Option> options;
+    List<Option> options = new ArrayList<>();
 
     @Builder
     public Product(int id, String name, String engName, String description, String tip, int isIced, String picUrl,
