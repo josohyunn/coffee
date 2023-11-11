@@ -8,14 +8,17 @@ import lombok.NoArgsConstructor;
 import shop.mtcoding.projectcoffeebackend.category.api.CategoryResponse;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Service
 public class CategoryService {
     private final CategoryJPARepository categoryJPARepository;
-    public CategoryResponse.CategoryListDTO 카테고리리스트() {
-        List<Category> categoryList = categoryJPARepository.findAll();
-        return new CategoryResponse.CategoryListDTO(categoryList);
+    public List<CategoryResponse.FindAllListDTO> findAllListCategory() {
+        List<Category> categoryPS = categoryJPARepository.findAll();
+        return categoryPS.stream()
+                .map(CategoryResponse.FindAllListDTO::new)
+                .collect(Collectors.toList());
     }
 }

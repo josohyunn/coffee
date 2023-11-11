@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
@@ -13,15 +14,14 @@ import shop.mtcoding.projectcoffeebackend.category.CategoryService;
 
 import java.util.List;
 
+@RequestMapping("/api")
 @RestController
 @RequiredArgsConstructor
 public class CategoryRestController {
-
     private final CategoryService categoryService;
-
-    @GetMapping("/api/category/")
-    public ResponseEntity<?> category(){
-    CategoryResponse.CategoryListDTO response = categoryService.카테고리리스트();
-    return ResponseEntity.ok().body(ApiUtils.success(response));
+    @GetMapping("/category")
+    public List<CategoryResponse.FindAllListDTO> category(){
+        List<CategoryResponse.FindAllListDTO> categoryList = categoryService.findAllListCategory();
+        return categoryList;
     }
 }
